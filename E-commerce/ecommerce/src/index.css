@@ -1,0 +1,61 @@
+/* ==============================
+   1. CSS Variables for Theming
+============================== */
+:root {
+  --primary-color: #ff6600;
+  --primary-hover: #e05500;
+  --secondary-color: #ccc;
+  --secondary-hover: #bbb;
+  --text-color: #222;
+  --bg-gradient: linear-gradient(to bottom, #deeff2, #ffffff);
+  --panel-blur: rgba(255, 255, 255, 0.7);
+}
+
+/* 2. Google Font */
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap'); */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background: var(--bg-gradient);
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+/* ==============================
+   Animations
+============================== */
+@keyframes cardFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==============================
+   Responsive
+============================== */
+@media (max-width: 768px) {
+  .app {
+    grid-template-areas:
+      "cart"
+      "wishlist"
+      "products";
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
