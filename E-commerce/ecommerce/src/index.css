@@ -30,6 +30,287 @@ body {
 }
 
 /* ==============================
+   Header & Navigation
+============================== */
+.site-header {
+  background: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar h1 {
+  font-size: clamp(1.2rem, 2vw, 2rem);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  position: relative;
+}
+
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: white;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+/* ==============================
+   Main Layout with Grid Areas
+============================== */
+.app {
+  width: 95%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-areas:
+    "cart products"
+    "wishlist products";
+  grid-template-columns: 1fr 3fr;
+  gap: 20px;
+}
+
+.cart-summary {
+  grid-area: cart;
+}
+
+.wishlist {
+  grid-area: wishlist;
+}
+
+.product-list {
+  grid-area: products;
+}
+
+/* ==============================
+   Panels with Glassmorphism
+============================== */
+.cart-summary,
+.wishlist {
+  background: var(--panel-blur);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 2px 8px;
+  backdrop-filter: blur(10px);
+}
+
+/* ==============================
+   Product List
+============================== */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 15px;
+}
+
+.product-card {
+  padding: 15px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 2px 8px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  animation: cardFade 0.5s ease-in;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px;
+  filter: brightness(1.05);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Category Icons */
+.product-card[data-category="audio"]::before {
+  content: "🎧";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+}
+
+.product-card[data-category="wearables"]::before {
+  content: "⌚";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+}
+
+.product-card[data-category="gaming"]::before {
+  content: "🎮";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+}
+
+.product-card[data-category="home"]::before {
+  content: "🏠";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+}
+
+.product-card[data-category="kitchen"]::before {
+  content: "🍳";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+}
+
+.product-card[data-category="fitness"]::before {
+  content: "🏋️";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+}
+
+.product-card[data-category="books"]::before {
+  content: "📚";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+}
+
+/* nth-child alternating */
+.product-card:nth-child(odd) {
+  background: #fafafa;
+}
+
+.product-card:nth-child(even) {
+  background: #fffdf5;
+}
+
+/* ==============================
+   Text & Price
+============================== */
+.rating {
+  font-size: 14px;
+  color: #ff9500;
+}
+
+.desc {
+  font-size: 14px;
+  color: #333;
+}
+
+.price {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 5px;
+}
+
+.sale-price {
+  color: #d47d03;
+}
+
+.status {
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.in-stock {
+  color: green;
+}
+
+.out-of-stock {
+  color: red;
+}
+
+/* ==============================
+   Buttons
+============================== */
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn.primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btn.secondary {
+  background: var(--secondary-color);
+  color: black;
+}
+
+.btn.secondary:hover {
+  background: var(--secondary-hover);
+}
+
+.btn:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* ==============================
+   Footer
+============================== */
+.site-footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: auto;
+}
+
+/* ==============================
    Animations
 ============================== */
 @keyframes cardFade {
